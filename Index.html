@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cashmiro Hub</title>
+
+    <meta name="theme-color" content="#0b0f14">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Telegram Mini App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader"></div>
+        <h2>Cashmiro Hub</h2>
+        <p>Loading community...</p>
+    </div>
+
+
+    <!-- APP -->
+    <div id="app" class="app hidden">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div class="brand">
+                <div class="brand-logo">C</div>
+
+                <div>
+                    <h1>cashmiro hub</h1>
+                    <span>Football Gaming Community</span>
+                </div>
+            </div>
+
+            <button class="profile-button" onclick="showPage('profile')">
+                <span id="topAvatar">👤</span>
+            </button>
+
+        </header>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+
+            <!-- DASHBOARD -->
+            <section id="dashboardPage" class="page active">
+
+                <div class="welcome-card">
+
+                    <div>
+                        <span class="small-label">WELCOME BACK</span>
+
+                        <h2>
+                            <span id="welcomeName">Member</span> 👋
+                        </h2>
+
+                        <p>
+                            Stay active. Play. Connect. Grow.
+                        </p>
+                    </div>
+
+                    <div class="coin-box">
+                        <span>🪙</span>
+                        <strong id="coinBalance">100</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK STATS -->
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <span>⚽</span>
+                        <strong id="matchesPlayed">0</strong>
+                        <small>Matches</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>🏆</span>
+                        <strong id="wins">0</strong>
+                        <small>Wins</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>🪙</span>
+                        <strong id="coinsSmall">100</strong>
+                        <small>Coins</small>
+                    </div>
+
+                </div>
+
+
+                <!-- NEXT MATCH -->
+                <div class="section-heading">
+
+                    <div>
+                        <span class="small-label">UP NEXT</span>
+                        <h3>Next Match</h3>
+                    </div>
+
+                    <button onclick="showPage('fixtures')">
+                        View all
+                    </button>
+
+                </div>
+
+
+                <div id="nextMatch" class="match-card">
+                    <!-- JS inserts match -->
+                </div>
+
+
+                <!-- COMMUNITY UPDATE -->
+                <div class="section-heading">
+                    <div>
+                        <span class="small-label">COMMUNITY</span>
+                        <h3>Latest Updates</h3>
+                    </div>
+                </div>
+
+                <div id="updatesContainer">
+                    <!-- JS inserts updates -->
+                </div>
+
+            </section>
+
+
+            <!-- FIXTURES -->
+            <section id="fixturesPage" class="page">
+
+                <div class="page-title">
+                    <span class="small-label">SCHEDULE</span>
+                    <h2>Match Fixtures</h2>
+                    <p>See upcoming community matches.</p>
+                </div>
+
+                <div id="fixturesContainer">
+                    <!-- JS inserts fixtures -->
+                </div>
+
+            </section>
+
+
+            <!-- PREDICTIONS -->
+            <section id="predictionsPage" class="page">
+
+                <div class="page-title">
+
+                    <span class="small-label">COMMUNITY GAME</span>
+
+                    <h2>Predictions</h2>
+
+                    <p>
+                        Make predictions and earn community coins.
+                    </p>
+
+                </div>
+
+
+                <div class="prediction-info">
+
+                    <span>🪙</span>
+
+                    <div>
+                        <strong>Community Coins</strong>
+
+                        <p>
+                            Coins are virtual points used inside the app.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div id="predictionContainer">
+                    <!-- JS inserts predictions -->
+                </div>
+
+            </section>
+
+
+            <!-- PROFILE -->
+            <section id="profilePage" class="page">
+
+                <div class="page-title">
+
+                    <span class="small-label">MEMBER</span>
+
+                    <h2>My Profile</h2>
+
+                </div>
+
+
+                <div class="profile-card">
+
+                    <div class="large-avatar" id="profileAvatar">
+                        👤
+                    </div>
+
+                    <h2 id="profileName">Member</h2>
+
+                    <p id="profileUsername">@telegram</p>
+
+                    <div class="member-badge">
+                        COMMUNITY MEMBER
+                    </div>
+
+                </div>
+
+
+                <div class="profile-details">
+
+                    <div class="detail-row">
+                        <span>Name</span>
+                        <strong id="detailName">Not set</strong>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Age</span>
+                        <strong id="detailAge">Not set</strong>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Game</span>
+                        <strong id="detailGame">FC Mobile</strong>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Coins</span>
+                        <strong id="detailCoins">100</strong>
+                    </div>
+
+                </div>
+
+
+                <button class="primary-button" onclick="openEditProfile()">
+                    Edit Profile
+                </button>
+
+            </section>
+
+
+            <!-- COMMUNITY -->
+            <section id="communityPage" class="page">
+
+                <div class="page-title">
+
+                    <span class="small-label">CASHMIRO HUB</span>
+
+                    <h2>Community</h2>
+
+                    <p>
+                        Stay connected with the community.
+                    </p>
+
+                </div>
+
+
+                <div class="community-card">
+
+                    <div class="community-icon">
+                        💬
+                    </div>
+
+                    <h3>Telegram Community</h3>
+
+                    <p>
+                        Join the official Telegram community for announcements,
+                        fixtures and tournament updates.
+                    </p>
+
+                    <a
+                        href="https://t.me/YOUR_GROUP"
+                        target="_blank"
+                        class="primary-button"
+                    >
+                        Join Telegram
+                    </a>
+
+                </div>
+
+
+                <div class="community-card">
+
+                    <div class="community-icon">
+                        🏆
+                    </div>
+
+                    <h3>Tournaments</h3>
+
+                    <p>
+                        Follow every tournament and stay active to remain
+                        eligible for community events.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- SETTINGS -->
+            <section id="settingsPage" class="page">
+
+                <div class="page-title">
+
+                    <span class="small-label">APP</span>
+
+                    <h2>Settings</h2>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <button onclick="toggleTheme()">
+                        🌙 Change Theme
+                    </button>
+
+                    <button onclick="showAbout()">
+                        ℹ️ About Cashmiro Hub
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- BOTTOM NAVIGATION -->
+        <nav class="bottom-nav">
+
+            <button
+                class="nav-item active"
+                onclick="showPage('dashboard')"
+                data-page="dashboard"
+            >
+                <span>🏠</span>
+                <small>Home</small>
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showPage('fixtures')"
+                data-page="fixtures"
+            >
+                <span>📅</span>
+                <small>Fixtures</small>
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showPage('predictions')"
+                data-page="predictions"
+            >
+                <span>🎯</span>
+                <small>Predict</small>
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showPage('community')"
+                data-page="community"
+            >
+                <span>👥</span>
+                <small>Community</small>
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showPage('profile')"
+                data-page="profile"
+            >
+                <span>👤</span>
+                <small>Profile</small>
+            </button>
+
+        </nav>
+
+    </div>
+
+
+    <!-- EDIT PROFILE MODAL -->
+    <div id="profileModal" class="modal hidden">
+
+        <div class="modal-content">
+
+            <button class="close-button" onclick="closeModal()">
+                ×
+            </button>
+
+            <h2>Edit Profile</h2>
+
+            <label>
+                Your Name
+            </label>
+
+            <input
+                id="editName"
+                type="text"
+                placeholder="Enter your name"
+            >
+
+
+            <label>
+                Age
+            </label>
+
+            <input
+                id="editAge"
+                type="number"
+                placeholder="Enter your age"
+            >
+
+
+            <label>
+                Favorite Game
+            </label>
+
+            <select id="editGame">
+
+                <option>FC Mobile</option>
+                <option>eFootball</option>
+                <option>GTA</option>
+
+            </select>
+
+
+            <button
+                class="primary-button"
+                onclick="saveProfile()"
+            >
+                Save Profile
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="app.js"></script>
+
+</body>
+</html>
